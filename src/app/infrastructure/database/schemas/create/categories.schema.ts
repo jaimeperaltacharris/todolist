@@ -1,0 +1,7 @@
+export const CREATE_CATEGORIES_SCHEMA = `CREATE TABLE IF NOT EXISTS categories(
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    description TEXT,
+    created_at TEXT NOT NULL,
+    is_active INTEGER NOT NULL DEFAULT 1
+  )`

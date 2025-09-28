@@ -1,0 +1,31 @@
+<ion-list>
+  <form [formGroup]="form" (ngSubmit)="submit()">
+    <ion-item>
+      <ion-label position="stacked">Nombre</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+
+    @if(form.get('name')?.touched && form.get('name')?.hasError('required')) {
+      <div class="error-message">
+        El nombre es obligatorio.
+      </div>
+    }
+
+    @if(form.get('name')?.touched && form.get('name')?.hasError('minlength')) {
+      <div class="error-message">
+        El nombre debe tener al menos 3 caracteres.
+      </div>
+    }
+
+    <ion-item>
+      <ion-label position="stacked">Descripción</ion-label>
+      <ion-input formControlName="description"></ion-input>
+    </ion-item>
+
+    <div class="ion-padding">
+      <ion-button expand="block" type="submit" [disabled]="form.invalid">
+        Guardar
+      </ion-button>
+    </div>
+  </form>
+</ion-list>

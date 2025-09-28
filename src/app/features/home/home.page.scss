@@ -1,0 +1,7 @@
+ion-fab {
+  margin-bottom: var(--ion-safe-area-bottom, 0);
+}
+
+app-category-list-modal, app-create-task-modal, app-edit-task-modal {
+  height: 100%;
+}

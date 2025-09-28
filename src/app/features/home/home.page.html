@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Lista de tareas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"
+  fixed-slot-placement="before">
+
+  @for (task of tasks; track task.id) {
+    <app-task-item [task]="task"
+      (editTask)="openEditModal(task)"
+      (taskDeleted)="removeTaskFromArray(task)"></app-task-item>
+  }
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button id="actions-trigger">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>
+
+<ion-popover trigger="actions-trigger"
+  triggerAction="actions"
+  side="top">
+
+  <ng-template>
+    <ion-content class="ion-padding">
+
+      <ion-button (click)="isCategoryModalOpen = true"
+        expand="block"
+        aria-label="category">
+        <ion-icon name="filter-circle-outline" aria-hidden="true"></ion-icon>
+        Nueva categoría
+      </ion-button>
+
+      <ion-button (click)="isCreateModalOpen = true"
+        aria-label="task"
+        expand="block">
+        <ion-icon name="document-text-outline" aria-hidden="true"></ion-icon>
+        Nueva Tarea
+      </ion-button>
+
+    </ion-content>
+  </ng-template>
+</ion-popover>
+
+<ion-modal [isOpen]="isCategoryModalOpen">
+  <ng-template>
+    <app-category-list-modal (needReloadTasks)="validateCategoryAction($event)"></app-category-list-modal>
+  </ng-template>
+</ion-modal>
+
+<ion-modal [isOpen]="isCreateModalOpen">
+  <ng-template>
+    <app-create-task-modal (needReloadTasks)="validateCategoryAction($event)"></app-create-task-modal>
+  </ng-template>
+</ion-modal>
+
+<ion-modal [isOpen]="isEditOpen">
+  <ng-template>
+    <app-edit-task-modal [task]="taskToEdit"
+      (editTask)="editTaskInfo($event)"></app-edit-task-modal>
+  </ng-template>
+</ion-modal>

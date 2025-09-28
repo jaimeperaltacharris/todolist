@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="needReloadTasks.emit(false)">Cerrar</ion-button>
+    </ion-buttons>
+    <ion-title>Nueva Tarea</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <app-form-task-modal [taskForm]="taskForm"
+    (save)="onSaveTask($event)"></app-form-task-modal>
+</ion-content>

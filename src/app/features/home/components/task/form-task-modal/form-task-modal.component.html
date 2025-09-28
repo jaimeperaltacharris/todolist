@@ -1,0 +1,41 @@
+<ion-list>
+  <form [formGroup]="taskForm" (ngSubmit)="submit()">
+
+    <ion-item>
+      <ion-label position="stacked">Título</ion-label>
+      <ion-input formControlName="name" placeholder="Ingresa el título"></ion-input>
+    </ion-item>
+
+    @if(taskForm.get('name')?.touched && taskForm.get('name')?.invalid) {
+      <div class="error">
+        El título es obligatorio
+      </div>
+    }
+
+    <ion-item>
+      <ion-label position="stacked">Descripción</ion-label>
+      <ion-textarea formControlName="description" placeholder="Detalles opcionales"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Categoría</ion-label>
+      <ion-select formControlName="category_id" placeholder="Selecciona una categoría">
+        @for(cat of categories; track cat.id) {
+          <ion-select-option [value]="cat.id">
+            {{ cat.name }}
+          </ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+
+    @if(taskForm.get('category_id')?.touched && taskForm.get('category_id')?.invalid) {
+      <div class="error">
+        Debes seleccionar una categoría
+      </div>
+    }  
+
+    <ion-button expand="block" type="submit" [disabled]="taskForm.invalid">
+      Guardar
+    </ion-button>
+  </form>
+</ion-list>

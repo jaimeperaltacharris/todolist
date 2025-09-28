@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="needReloadTasks.emit(false)">Cerrar</ion-button>
+    </ion-buttons>
+    <ion-title>Mis Categorías</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true"
+  class="ion-padding">
+
+  <ion-button (click)="isCreateCategoryOpen = true"
+    class="category__btn--add"
+    expand="block"
+    aria-label="category">
+
+    <ion-icon name="add-circle-outline" aria-hidden="true"></ion-icon>
+    Nueva categoría
+    
+  </ion-button>
+
+  @for (category of categories; track category.id) {
+    <app-category-list-item [category]="category"
+      (editCategory)="openEditModal(category)"
+      (categoryDeleted)="removeTaskFromArray(category)"></app-category-list-item>
+  }
+
+  <ion-modal [isOpen]="isCreateCategoryOpen">
+    <ng-template>
+      <app-modal-category (needReloadTasks)="validateCategoryAction($event)"></app-modal-category>
+    </ng-template>
+  </ion-modal>
+
+  <ion-modal [isOpen]="isEditOpen">
+    <ng-template>
+      <app-category-edit-modal [category]="categoryToEdit"
+        (editCategory)="editCategoryInfo($event)"></app-category-edit-modal>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>
