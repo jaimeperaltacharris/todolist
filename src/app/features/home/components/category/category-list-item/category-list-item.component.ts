@@ -1,6 +1,4 @@
 import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
-import { DeleteTaskUseCase } from '@core/uses-cases/tasks/delete/delete-task.usecase';
-import { UpdateStatusTaskUseCase } from '@core/uses-cases/tasks/updateStatus/update-status-task.usecase';
 import { addIcons } from 'ionicons';
 import { trashOutline } from 'ionicons/icons';
 import {

@@ -9,7 +9,11 @@ import {
   IonIcon,
   IonPopover,
   IonButton,
-  IonModal
+  IonModal,
+  IonItem,
+  IonLabel,
+  IonSelect,
+  IonSelectOption,
 } from '@ionic/angular/standalone';
 import { Task } from '@core/entities/task';
 import { GetAllTasksUseCase } from '@core/uses-cases/tasks/getAll/get-all-tasks.usecase';
@@ -26,12 +30,21 @@ import { CategoryListModalComponent } from './components/category/category-list-
 import { CreateTaskModalComponent } from './components/task/create-task-modal/create-task-modal.component';
 import { EditTaskModalComponent } from './components/task/edit-task-modal/edit-task-modal.component';
 import { IEditTask } from './interfaces/edit-task.interface';
+import { Category } from '@core/entities/category';
+import { FormsModule } from '@angular/forms';
+import { GetAllCategoriesUseCase } from '@core/uses-cases/categories/getAll/get-all-categories.usecase';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
-  imports: [IonModal,
+  imports: [
+    FormsModule,
+    IonItem,
+    IonLabel,
+    IonSelect,
+    IonSelectOption,
+    IonModal,
     IonButton,
     IonPopover,
     IonIcon,
@@ -49,14 +62,18 @@ import { IEditTask } from './interfaces/edit-task.interface';
 })
 export class HomePage implements OnInit {
   tasks: Task[] = [];
+  taskToEdit!: Task;
+  categories: Category[] = [];
+  selectedCategory: number | 'all' = 'all';
+  
   isCreateModalOpen = false;
   isCategoryModalOpen = false;
-  taskToEdit!: Task;
   isEditOpen = false;
 
   private getAllTasks = inject(GetAllTasksUseCase);
   private getByCategoryTaskUseCase = inject(GetByCategoryTasksUseCase);
   private updateTaskUseCase = inject(UpdateTaskUseCase);
+  private getAllCategoryUseCase = inject(GetAllCategoriesUseCase);
 
   constructor() {
     addIcons({
@@ -68,6 +85,7 @@ export class HomePage implements OnInit {
 
   ngOnInit(): void {
     this.getTasks();
+    this.getAllCategories();
   }
 
   removeTaskFromArray(taskSelected: Task): void {
@@ -78,6 +96,7 @@ export class HomePage implements OnInit {
   validateCategoryAction($event: boolean): void {
     if ($event) {
       this.getTasks();
+      this.getAllCategories();
     }
 
     this.isCategoryModalOpen = false;
@@ -101,11 +120,23 @@ export class HomePage implements OnInit {
     this.isEditOpen = false;
   }
 
+  onCategoryChange() {
+    if (this.selectedCategory === 'all') {
+      this.getTasks();
+    } else {
+      this.getByCategory();
+    }
+  }
+
   async getTasks(): Promise<void> {
     this.tasks = await this.getAllTasks.execute();
   }
 
+  async getAllCategories(): Promise<void> {
+    this.categories = await this.getAllCategoryUseCase.execute();
+  }
+
   async getByCategory(): Promise<void> {
-    this.tasks = await this.getByCategoryTaskUseCase.execute(1);
+    this.tasks = await this.getByCategoryTaskUseCase.execute(this.selectedCategory as number);
   }
 }

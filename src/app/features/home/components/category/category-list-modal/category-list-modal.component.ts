@@ -68,6 +68,7 @@ export class CategoryListModalComponent implements OnInit {
   validateCategoryAction($event: boolean): void {
     if($event) {
       this.getAllCategories();
+      this.needReloadTasks.emit(true);
     }
 
     this.isCreateCategoryOpen = false

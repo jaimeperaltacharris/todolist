@@ -9,6 +9,23 @@
 <ion-content [fullscreen]="true"
   fixed-slot-placement="before">
 
+  <ion-item>
+    <ion-label>Categoría</ion-label>
+
+    <ion-select [(ngModel)]="selectedCategory"
+      (ionChange)="onCategoryChange()">
+
+      <ion-select-option value="all">Todas</ion-select-option>
+      @for(cat of categories; track cat.id) {
+        <ion-select-option
+          [value]="cat.id">
+          {{ cat.name }}
+        </ion-select-option>
+      }
+
+    </ion-select>
+  </ion-item>
+
   @for (task of tasks; track task.id) {
     <app-task-item [task]="task"
       (editTask)="openEditModal(task)"
@@ -34,7 +51,7 @@
         expand="block"
         aria-label="category">
         <ion-icon name="filter-circle-outline" aria-hidden="true"></ion-icon>
-        Nueva categoría
+        Mis categorías
       </ion-button>
 
       <ion-button (click)="isCreateModalOpen = true"
