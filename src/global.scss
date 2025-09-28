@@ -10,6 +10,8 @@
  */
 
 /* Core CSS required for Ionic components to work properly */
+@use 'theme/fonts.scss';
+
 @import "@ionic/angular/css/core.css";
 
 /* Basic CSS for apps built with Ionic */
@@ -35,3 +37,52 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+ion-item::part(native) {
+    min-height: auto;
+    padding: 0;
+    border: none;
+    border-radius: 0;
+    --inner-padding-end: 0;
+    background: transparent;
+    --background: transparent;
+}
+
+ion-toolbar {
+    ion-title {
+        font-family: var(--font-montserrat-semi-bold);
+    }
+
+    ion-button {
+        font-family: var(--font-montserrat-regular);
+    }
+}
+
+ion-item {
+    ion-label {
+        font-family: var(--font-montserrat-semi-bold) !important;
+        font-size: 1rem !important;
+    }
+
+    ion-input,
+    ion-textarea {
+        font-family: var(--font-montserrat-regular) !important;
+        font-size: 0.75rem !important;
+    }
+}
+
+ion-action-sheet {
+    --button-color: var(--action-sheet-buttton-color) !important;
+    font-family: var(--font-montserrat-regular) !important;
+}
+
+@media (prefers-color-scheme: dark) {
+    .btn--action {
+        --background: var(--button-background);
+        color: var(--button-color);
+
+        &::part(native) {
+            border: 0.0625rem solid var(--button-border)
+        }
+    }
+}

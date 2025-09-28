@@ -1,5 +1,6 @@
-<ion-list class="ion-margin-bottom">
-  <ion-item>
+<ion-list class="category-list-item__container">
+  
+  <ion-item lines="none">
 
     <ion-label (click)="editCategory.emit()">
       <h2>{{ category.name }}</h2>
@@ -9,7 +10,7 @@
     <ion-button (click)="deleteCategory()"
       slot="end"
       fill="clear"
-      color="danger">
+      class="icon--delete ">
       <ion-icon name="trash-outline"></ion-icon>
     </ion-button>
 

@@ -1,5 +1,11 @@
 .error-message {
   color: red;
   font-size: 0.8rem;
-  margin: 0.25rem 1rem;
+  margin: 0.25rem 0;
+}
+
+@media (prefers-color-scheme: dark) {
+  ion-list {
+    background: transparent;
+  }
 }

@@ -5,3 +5,20 @@ ion-fab {
 app-category-list-modal, app-create-task-modal, app-edit-task-modal {
   height: 100%;
 }
+
+ion-popover, ion-popover::ng-deep ion-content::part(background) {
+  --background: transparent;
+  background: transparent;
+}
+
+.mr--05 {
+  margin-right: 0.5rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  ion-fab-button::part(native) {
+    --background: var(--fab-button);
+    color: var(--fab-button-color);
+    border: 1px soliid var(--fab-button-border);
+  }
+}

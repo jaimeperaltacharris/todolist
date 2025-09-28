@@ -1,0 +1,25 @@
+.category-list-item__container {
+    background: var(--background-list);
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    box-shadow: 0 0.125rem 0.5rem 0 var(--box-shadows);
+    margin-bottom: 1rem;
+}
+
+h2 {
+    font-family: var(--font-montserrat-semi-bold);
+}
+
+p {
+    font-family: var(--font-montserrat-regular);
+}
+
+.icon--delete {
+    color: var(--delete-icon);
+}
+
+@media (prefers-color-scheme: dark) {
+    .category-list-item__container {
+        box-shadow: none;
+    }
+}

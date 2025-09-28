@@ -1,5 +1,6 @@
-<ion-list>
-  <ion-item>
+<ion-list class="task-item__container"
+  [ngClass]="{'task-item__status-completed': task.completed}">
+  <ion-item lines="none">
 
     <ion-label (click)="editTask.emit()">
       <h2>{{ task.name }}</h2>
@@ -13,7 +14,7 @@
     <ion-button (click)="deleteTask()"
       slot="end"
       fill="clear"
-      color="danger">
+      class="icon--delete">
       <ion-icon name="trash-outline"></ion-icon>
     </ion-button>
 

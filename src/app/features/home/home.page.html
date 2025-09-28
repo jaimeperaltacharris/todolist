@@ -1,18 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
+    <ion-title class="ion-text-center">
       Lista de tareas
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true"
+  class="ion-padding"
   fixed-slot-placement="before">
 
-  <ion-item>
-    <ion-label>Categoría</ion-label>
+  <ion-item class="ion-margin-bottom">
+    <ion-label>Filtrar por categoría</ion-label>
 
     <ion-select [(ngModel)]="selectedCategory"
+      interface="action-sheet"
       (ionChange)="onCategoryChange()">
 
       <ion-select-option value="all">Todas</ion-select-option>
@@ -28,6 +30,7 @@
 
   @for (task of tasks; track task.id) {
     <app-task-item [task]="task"
+      (statusUpdated)="updateTaskStatus(task)"
       (editTask)="openEditModal(task)"
       (taskDeleted)="removeTaskFromArray(task)"></app-task-item>
   }
@@ -40,24 +43,27 @@
 
 </ion-content>
 
-<ion-popover trigger="actions-trigger"
+<ion-popover #popoverActions
+  trigger="actions-trigger"
   triggerAction="actions"
   side="top">
 
   <ng-template>
-    <ion-content class="ion-padding">
+    <ion-content class="ion-no-padding">
 
-      <ion-button (click)="isCategoryModalOpen = true"
+      <ion-button (click)="isCategoryModalOpen = true; closePopover()"
         expand="block"
-        aria-label="category">
-        <ion-icon name="filter-circle-outline" aria-hidden="true"></ion-icon>
+        aria-label="category"
+        class="btn--action">
+        <ion-icon class="mr--05" name="filter-circle-outline" aria-hidden="true"></ion-icon>
         Mis categorías
       </ion-button>
 
-      <ion-button (click)="isCreateModalOpen = true"
+      <ion-button (click)="isCreateModalOpen = true; closePopover()"
         aria-label="task"
-        expand="block">
-        <ion-icon name="document-text-outline" aria-hidden="true"></ion-icon>
+        expand="block"
+        class="btn--action">
+        <ion-icon class="mr--05" name="document-text-outline" aria-hidden="true"></ion-icon>
         Nueva Tarea
       </ion-button>
 

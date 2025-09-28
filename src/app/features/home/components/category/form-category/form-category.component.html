@@ -2,7 +2,7 @@
   <form [formGroup]="form" (ngSubmit)="submit()">
     <ion-item>
       <ion-label position="stacked">Nombre</ion-label>
-      <ion-input formControlName="name"></ion-input>
+      <ion-input formControlName="name" placeholder="Ingresa el nombre de la categoría"></ion-input>
     </ion-item>
 
     @if(form.get('name')?.touched && form.get('name')?.hasError('required')) {
@@ -19,11 +19,11 @@
 
     <ion-item>
       <ion-label position="stacked">Descripción</ion-label>
-      <ion-input formControlName="description"></ion-input>
+      <ion-input formControlName="description" placeholder="Ingresa una descripción para la categoría"></ion-input>
     </ion-item>
 
     <div class="ion-padding">
-      <ion-button expand="block" type="submit" [disabled]="form.invalid">
+      <ion-button class="btn--action" expand="block" type="submit" [disabled]="form.invalid">
         Guardar
       </ion-button>
     </div>

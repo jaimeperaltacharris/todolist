@@ -51,6 +51,22 @@ export class CategoryListModalComponent implements OnInit {
 
   async getAllCategories(): Promise<void> {
     this.categories = await this.getAllCategoryUseCase.execute();
+    // this.categories = this.categories = [
+    //   {
+    //     "id": 1,
+    //     "name": "Personal",
+    //     "description": "Tareas y recados de la vida diaria, como compras o citas médicas.",
+    //     "created_at": "2025-09-01T10:00:00Z",
+    //     "is_active": true
+    //   },
+    //   {
+    //     "id": 2,
+    //     "name": "Trabajo/Profesional",
+    //     "description": "Proyectos, reuniones y actividades relacionadas con la oficina o el empleo.",
+    //     "created_at": "2025-09-01T10:00:00Z",
+    //     "is_active": true
+    //   },
+    // ]
   }
 
   openEditModal(category: Category): void {

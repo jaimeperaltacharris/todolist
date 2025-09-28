@@ -1,0 +1,34 @@
+.task-item__container {
+    background: var(--background-list);
+    border-radius: 0.25rem;
+    padding: 0.5rem;
+    box-shadow: 0 0.0625rem 0.5rem 0 var(--box-shadows);
+    margin-bottom: 1rem;
+}
+
+.task-item__status-completed {
+    background: var(--background-completed);
+}
+
+h2 {
+    font-family: var(--font-montserrat-semi-bold);
+}
+
+p {
+    font-family: var(--font-montserrat-regular);
+}
+
+.icon--delete {
+    color: var(--delete-icon);
+}
+
+@media (prefers-color-scheme: dark) {
+    .task-item__container {
+        box-shadow: none;
+    }
+
+    ion-checkbox {
+        --checkbox-background-checked: var(--background-checked);
+        --border-color-checked: var(--border-checked);
+    }
+}
