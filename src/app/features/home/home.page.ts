@@ -33,6 +33,7 @@ import { IEditTask } from './interfaces/edit-task.interface';
 import { Category } from '@core/entities/category';
 import { FormsModule } from '@angular/forms';
 import { GetAllCategoriesUseCase } from '@core/uses-cases/categories/getAll/get-all-categories.usecase';
+import { NoDataComponent } from 'src/app/shared/components/no-data/no-data.component';
 
 @Component({
   selector: 'app-home',
@@ -57,7 +58,8 @@ import { GetAllCategoriesUseCase } from '@core/uses-cases/categories/getAll/get-
     TaskItemComponent,
     CategoryListModalComponent,
     CreateTaskModalComponent,
-    EditTaskModalComponent
+    EditTaskModalComponent,
+    NoDataComponent
   ],
 })
 export class HomePage implements OnInit {
@@ -173,22 +175,22 @@ export class HomePage implements OnInit {
   }
 
   async getAllCategories(): Promise<void> {
-    // this.categories = await this.getAllCategoryUseCase.execute();
-    this.categories = [
-      {
-        "id": 1,
-        "name": "Personal",
-        "description": "Tareas y recados de la vida diaria, como compras o citas médicas.",
-        "created_at": "2025-09-01T10:00:00Z",
-        "is_active": true
-      },
-      {
-        "id": 2,
-        "name": "Trabajo/Profesional",
-        "description": "Proyectos, reuniones y actividades relacionadas con la oficina o el empleo.",
-        "is_active": true
-      },
-    ]
+    this.categories = await this.getAllCategoryUseCase.execute();
+    // this.categories = [
+    //   {
+    //     "id": 1,
+    //     "name": "Personal",
+    //     "description": "Tareas y recados de la vida diaria, como compras o citas médicas.",
+    //     "created_at": "2025-09-01T10:00:00Z",
+    //     "is_active": true
+    //   },
+    //   {
+    //     "id": 2,
+    //     "name": "Trabajo/Profesional",
+    //     "description": "Proyectos, reuniones y actividades relacionadas con la oficina o el empleo.",
+    //     "is_active": true
+    //   },
+    // ]
   }
 
   async getByCategory(): Promise<void> {

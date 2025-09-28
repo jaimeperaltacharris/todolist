@@ -28,11 +28,15 @@
     </ion-select>
   </ion-item>
 
-  @for (task of tasks; track task.id) {
-    <app-task-item [task]="task"
-      (statusUpdated)="updateTaskStatus(task)"
-      (editTask)="openEditModal(task)"
-      (taskDeleted)="removeTaskFromArray(task)"></app-task-item>
+  @if(!tasks.length) {
+    <app-no-data [text]="'Aun no tienes tareas registradas.'"></app-no-data>
+  } @else {
+    @for (task of tasks; track task.id) {
+      <app-task-item [task]="task"
+        (statusUpdated)="updateTaskStatus(task)"
+        (editTask)="openEditModal(task)"
+        (taskDeleted)="removeTaskFromArray(task)"></app-task-item>
+    }
   }
 
   <ion-fab slot="fixed" vertical="bottom" horizontal="end">

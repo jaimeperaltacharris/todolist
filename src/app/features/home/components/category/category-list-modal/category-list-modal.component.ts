@@ -10,6 +10,7 @@ import { CategoryEditModalComponent } from '../category-edit-modal/category-edit
 import { IEditCategory } from '@features/home/interfaces/edit-category.interface';
 import { UpdateCategoryUseCase } from '@core/uses-cases/categories/update/update-category.usecase';
 import { DeleteCategoryUseCase } from '@core/uses-cases/categories/delete/delete-category.usecase';
+import { NoDataComponent } from 'src/app/shared/components/no-data/no-data.component';
 
 @Component({
   selector: 'app-category-list-modal',
@@ -23,7 +24,8 @@ import { DeleteCategoryUseCase } from '@core/uses-cases/categories/delete/delete
     IonTitle,
     CategoryListItemComponent,
     ModalCategoryComponent,
-    CategoryEditModalComponent
+    CategoryEditModalComponent,
+    NoDataComponent
   ]
 
 })

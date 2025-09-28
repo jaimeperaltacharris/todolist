@@ -20,10 +20,14 @@
     
   </ion-button>
 
-  @for (category of categories; track category.id) {
-    <app-category-list-item [category]="category"
-      (editCategory)="openEditModal(category)"
-      (categoryDeleted)="removeTaskFromArray(category)"></app-category-list-item>
+  @if(!categories.length) {
+    <app-no-data [text]="'Aun no tienes categorías registradas.'"></app-no-data>
+  } @else {
+    @for (category of categories; track category.id) {
+      <app-category-list-item [category]="category"
+        (editCategory)="openEditModal(category)"
+        (categoryDeleted)="removeTaskFromArray(category)"></app-category-list-item>
+    }
   }
 
   <ion-modal [isOpen]="isCreateCategoryOpen">
