@@ -13,17 +13,22 @@ Aplicación base de desarrollo móvil utilizando **Ionic Framework** y **Angular
 
 ---
 
+## 📦 Como ejecutar la aplicación
+
+- Ejecutar `npm install`
+- Agregar plataforma android `cordova platform add android`
+- Agregar plataforma iOS `cordova platform add iOS`
+- Generar build en modo debug `npm run {{plataforma}}:debug`
+- Generar build en modo release `npm run {{plataforma}}:release`
+
+
 ## 📦 Scripts y Comandos Disponibles
 
 Estos comandos, definidos en `package.json`, te ayudarán en el ciclo de desarrollo y compilación de tu aplicación.
 
 | Script | Descripción |
 | :--- | :--- |
-| `npm start` | Inicia el servidor de desarrollo de **Angular** (`ng serve`). |
-| `npm run ionic:serve` | Inicia la app **Ionic** en el navegador para desarrollo web. |
-| `npm run build` | Compila la aplicación web para producción (`ng build`). |
-| `npm run android` | Ejecuta la app en **Android** con *live-reload* y `ionic cordova run android -l`. |
-| `npm run ios` | Ejecuta la app en **iOS** con *live-reload* y `ionic cordova run ios -l`. |
+| `npm run serve` | Inicia la app **Ionic** en el navegador para desarrollo web. |
 | `npm run android:debug` | **Compila la APK/AAB** de Android en modo **`--debug`**. |
 | `npm run android:release` | **Compila la APK/AAB** de Android en modo **`--release`** (Lista para subir a tiendas). |
 | `npm run ios:debug` | **Compila la app iOS** en modo **`--debug`**. |

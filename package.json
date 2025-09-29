@@ -54,6 +54,7 @@
     "cordova": "^12.0.0",
     "cordova-android": "^14.0.1",
     "cordova-ios": "^7.1.1",
+    "cordova-plugin-android-dark-mode-support": "^2.0.0",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^5.0.0",
@@ -81,11 +82,12 @@
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-webview": {},
       "cordova-plugin-ionic-keyboard": {},
-      "cordova-sqlite-storage": {}
+      "cordova-sqlite-storage": {},
+      "cordova-plugin-android-dark-mode-support": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

@@ -48,6 +48,9 @@
         <splash density="port-xhdpi" src="resources/android/splash/drawable-port-xhdpi-screen.png" />
         <splash density="port-xxhdpi" src="resources/android/splash/drawable-port-xxhdpi-screen.png" />
         <splash density="port-xxxhdpi" src="resources/android/splash/drawable-port-xxxhdpi-screen.png" />
+        <preference name="GradlePluginKotlinEnabled" value="true" />
+        <preference name="AndroidXEnabled" value="true" />
+        <preference name="AndroidPostSplashScreenTheme" value="@style/Theme.AppCompat.DayNight.NoActionBar" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
