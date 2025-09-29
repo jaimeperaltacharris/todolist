@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ViewChild, viewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -34,6 +34,7 @@ import { Category } from '@core/entities/category';
 import { FormsModule } from '@angular/forms';
 import { GetAllCategoriesUseCase } from '@core/uses-cases/categories/getAll/get-all-categories.usecase';
 import { NoDataComponent } from 'src/app/shared/components/no-data/no-data.component';
+import { FirebaseService } from '@shared/services/firebase/firebase';
 
 @Component({
   selector: 'app-home',
@@ -73,12 +74,14 @@ export class HomePage implements OnInit {
   isCreateModalOpen = false;
   isCategoryModalOpen = false;
   isEditOpen = false;
+  isCreateTaskActive = false;
 
   private getAllTasks = inject(GetAllTasksUseCase);
   private getByCategoryTaskUseCase = inject(GetByCategoryTasksUseCase);
   private updateTaskUseCase = inject(UpdateTaskUseCase);
   private getAllCategoryUseCase = inject(GetAllCategoriesUseCase);
-
+  private firebaseService = inject(FirebaseService);
+  
   constructor() {
     addIcons({
       'add': add,
@@ -88,6 +91,7 @@ export class HomePage implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getConfiguration();
     this.getTasks();
     this.getAllCategories();
   }
@@ -139,58 +143,10 @@ export class HomePage implements OnInit {
 
   async getTasks(): Promise<void> {
     this.tasks = await this.getAllTasks.execute();
-    // this.tasks = [
-    //   {
-    //     "id": 101,
-    //     "name": "Preparar presentación de ventas",
-    //     "description": "Reunir los datos del último trimestre y diseñar diapositivas atractivas.",
-    //     "category_id": 5,
-    //     "completed": false,
-    //     "created_at": "2025-09-28T14:00:00Z",
-    //     "is_active": true
-    //   },
-    //   {
-    //     "id": 102,
-    //     "name": "Comprar leche y pan",
-    //     "category_id": 1,
-    //     "completed": true,
-    //     "created_at": "2025-09-27T08:30:00Z",
-    //     "is_active": true
-    //   },
-    //   {
-    //     "id": 103,
-    //     "name": "Revisar código del módulo de autenticación",
-    //     "description": "Asegurar que todas las rutas estén protegidas y los tests pasen.",
-    //     "category_id": 3,
-    //     "completed": false,
-    //     "is_active": true
-    //   },
-    //   {
-    //     "name": "Investigar herramienta de BI",
-    //     "description": "Buscar alternativas a Tableau y Power BI.",
-    //     "category_id": 4,
-    //     "is_active": true
-    //   }
-    // ]
   }
 
   async getAllCategories(): Promise<void> {
     this.categories = await this.getAllCategoryUseCase.execute();
-    // this.categories = [
-    //   {
-    //     "id": 1,
-    //     "name": "Personal",
-    //     "description": "Tareas y recados de la vida diaria, como compras o citas médicas.",
-    //     "created_at": "2025-09-01T10:00:00Z",
-    //     "is_active": true
-    //   },
-    //   {
-    //     "id": 2,
-    //     "name": "Trabajo/Profesional",
-    //     "description": "Proyectos, reuniones y actividades relacionadas con la oficina o el empleo.",
-    //     "is_active": true
-    //   },
-    // ]
   }
 
   async getByCategory(): Promise<void> {
@@ -199,5 +155,9 @@ export class HomePage implements OnInit {
 
   closePopover(): void {
     this.popover.dismiss();
+  }
+
+  async getConfiguration(): Promise<void> {
+    this.isCreateTaskActive = await this.firebaseService.getConfigValueAsBoolean("feature_create_task");
   }
 }

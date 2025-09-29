@@ -11,6 +11,7 @@ import { IEditCategory } from '@features/home/interfaces/edit-category.interface
 import { UpdateCategoryUseCase } from '@core/uses-cases/categories/update/update-category.usecase';
 import { DeleteCategoryUseCase } from '@core/uses-cases/categories/delete/delete-category.usecase';
 import { NoDataComponent } from 'src/app/shared/components/no-data/no-data.component';
+import { FirebaseService } from '@shared/services/firebase/firebase';
 
 @Component({
   selector: 'app-category-list-modal',
@@ -36,10 +37,12 @@ export class CategoryListModalComponent implements OnInit {
   categoryToEdit!: Category;
   isCreateCategoryOpen = false;
   isEditOpen = false;
+  isCreateCategoryActive = false;
 
   private getAllCategoryUseCase = inject(GetAllCategoriesUseCase);
   private updateCategoryUseCase = inject(UpdateCategoryUseCase);
   private deleteCategoryUseCase = inject(DeleteCategoryUseCase);
+  private firebaseService = inject(FirebaseService);
 
   constructor() {
     addIcons({
@@ -48,27 +51,12 @@ export class CategoryListModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getConfiguration();
     this.getAllCategories();
   }
 
   async getAllCategories(): Promise<void> {
     this.categories = await this.getAllCategoryUseCase.execute();
-    // this.categories = this.categories = [
-    //   {
-    //     "id": 1,
-    //     "name": "Personal",
-    //     "description": "Tareas y recados de la vida diaria, como compras o citas médicas.",
-    //     "created_at": "2025-09-01T10:00:00Z",
-    //     "is_active": true
-    //   },
-    //   {
-    //     "id": 2,
-    //     "name": "Trabajo/Profesional",
-    //     "description": "Proyectos, reuniones y actividades relacionadas con la oficina o el empleo.",
-    //     "created_at": "2025-09-01T10:00:00Z",
-    //     "is_active": true
-    //   },
-    // ]
   }
 
   openEditModal(category: Category): void {
@@ -103,5 +91,10 @@ export class CategoryListModalComponent implements OnInit {
       this.updateCategoryUseCase.execute(this.categories[categoryIndex]);
     }
     this.isEditOpen = false;
+  }
+
+  async getConfiguration(): Promise<void> {
+    this.isCreateCategoryActive = await this.firebaseService.getConfigValueAsBoolean("feature_create_category");
+    console.warn(this.isCreateCategoryActive," careogira")
   }
 }

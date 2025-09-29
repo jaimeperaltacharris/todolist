@@ -63,13 +63,15 @@
         Mis categorías
       </ion-button>
 
-      <ion-button (click)="isCreateModalOpen = true; closePopover()"
-        aria-label="task"
-        expand="block"
-        class="btn--action">
-        <ion-icon class="mr--05" name="document-text-outline" aria-hidden="true"></ion-icon>
-        Nueva Tarea
-      </ion-button>
+      @if(isCreateTaskActive) {
+        <ion-button (click)="isCreateModalOpen = true; closePopover()"
+          aria-label="task"
+          expand="block"
+          class="btn--action">
+          <ion-icon class="mr--05" name="document-text-outline" aria-hidden="true"></ion-icon>
+          Nueva Tarea
+        </ion-button>
+      }
 
     </ion-content>
   </ng-template>

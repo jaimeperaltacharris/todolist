@@ -10,15 +10,17 @@
 <ion-content [fullscreen]="true"
   class="ion-padding">
 
-  <ion-button (click)="isCreateCategoryOpen = true"
-    class="category__btn--add btn--action"
-    expand="block"
-    aria-label="category">
-
-    <ion-icon name="add-circle-outline mr--05" aria-hidden="true"></ion-icon>
-    Nueva categoría
-    
-  </ion-button>
+  @if(isCreateCategoryActive) {
+    <ion-button (click)="isCreateCategoryOpen = true"
+      class="category__btn--add btn--action"
+      expand="block"
+      aria-label="category">
+  
+      <ion-icon name="add-circle-outline mr--05" aria-hidden="true"></ion-icon>
+      Nueva categoría
+      
+    </ion-button>
+  }
 
   @if(!categories.length) {
     <app-no-data [text]="'Aun no tienes categorías registradas.'"></app-no-data>
