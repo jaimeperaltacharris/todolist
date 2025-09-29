@@ -9,7 +9,7 @@
     "serve": "ionic serve --host=localhost --port=8100",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test",
+    "test": "ng test --code-coverage --watch=false",
     "lint": "ng lint",
     "ionic:build": "ng build --configuration=development",
     "android": "ionic cordova run android -l",

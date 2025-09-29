@@ -15,7 +15,7 @@ export class FirebaseService {
     this.remoteConfig = getRemoteConfig(app);
 
     this.remoteConfig.settings = {
-      minimumFetchIntervalMillis: 60000, // 1 hora
+      minimumFetchIntervalMillis: 3600000, // 1 hora
       fetchTimeoutMillis: 60000            // 60 segundos
     };
 
@@ -25,7 +25,7 @@ export class FirebaseService {
     };
   }
 
-  async initRemoteConfig() {
+  async initRemoteConfig(): Promise<void> {
     try {
       await fetchAndActivate(this.remoteConfig);
       console.log('Remote Config activado correctamente');
