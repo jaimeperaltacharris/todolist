@@ -52,7 +52,6 @@
     "@typescript-eslint/parser": "^8.18.0",
     "cordova": "^12.0.0",
     "cordova-android": "^14.0.1",
-    "cordova-ios": "^7.1.1",
     "cordova-plugin-device": "2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.0.5",
     "cordova-plugin-ionic-webview": "^5.0.0",
@@ -83,8 +82,7 @@
       "cordova-sqlite-storage": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "android"
     ]
   }
 }
